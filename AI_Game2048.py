@@ -59,7 +59,7 @@ while not exit_program:
     #     (board, score), reward, done = sim.step(action)
     #
     # When you take an action, set the variable action_taken to True. As you 
-    # can see below, the code only steps the envirionment when action_taken 
+    # can see below, the code only steps the environment when action_taken
     # is True, since the whole game runs in an infinite loop.
     
 

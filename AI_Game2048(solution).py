@@ -65,7 +65,7 @@ while not exit_program:
                 action = actions[np.random.randint(4)]
             # Accumulate scores
             scores[init_action] += score
-    # Take initial action with highest score
+    # Take initial action with the highest score
     action = max(scores, key=lambda key: scores[key])
     action_taken = True
 

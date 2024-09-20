@@ -9,9 +9,9 @@
 #    r       : Restart game
 #    q / ESC : Quit
 
-from Game2048 import Game2048
-import numpy as np
 import pygame
+
+from Game2048 import Game2048
 
 env = Game2048()
 env.reset()
