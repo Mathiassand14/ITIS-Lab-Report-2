@@ -170,3 +170,9 @@ cython_debug/
 synctex.gz
 .toc
 /.idea/codeStyles/codeStyleConfig.xml
+*.fls
+*.toc
+*.aux
+*.fdb_latexmk
+*.out
+*.gz
