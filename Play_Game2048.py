@@ -18,6 +18,7 @@ env.reset()
 actions = ['left', 'right', 'up', 'down']
 exit_program = False
 action_taken = False
+
 while not exit_program:
     env.render()
 
