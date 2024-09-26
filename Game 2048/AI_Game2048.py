@@ -83,11 +83,11 @@ def run_game(num_games_pr_action: int = 10):
 
     return score
 i = 1
-score = [[]]
+score = []
 while True:
-    scores = [[]]
+    scores = []
     for _ in range(10):
-        sc = run_game()
+        sc = run_game(i)
         scores.append([i, sc])
         print(scores)
     score.append(scores)
