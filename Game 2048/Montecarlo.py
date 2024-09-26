@@ -8,7 +8,7 @@ def rate_actions(board: Game2048, num_games_pr_action: int, posible_actions: lis
     for action in posible_actions:
         action_scores = []
         for i in range(num_games_pr_action):
-            temp_board = Game2048((board.board, board.score))
+            temp_board = Game2048((board.board, board.score),)
             (temp_board_state, temp_score), reward, done = temp_board.step(action)
 
             while not done:
