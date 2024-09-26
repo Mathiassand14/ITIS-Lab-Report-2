@@ -14,7 +14,7 @@ from Game2048 import Game2048
 import numpy as np
 import pygame
 from Montecarlo import rate_actions
-def run_game():
+def run_game(num_games_pr_action: int = 10):
     env = Game2048()
     env.reset()
     actions = ['left', 'right', 'up', 'down']
@@ -22,7 +22,7 @@ def run_game():
     action_taken = False
 
     while not exit_program:
-        env.render()
+        #env.render()
 
         # Process game events
         for event in pygame.event.get():
@@ -66,7 +66,7 @@ def run_game():
         # can see below, the code only steps the environment when action_taken
         # is True, since the whole game runs in an infinite loop.
 
-        r_a = rate_actions(env, 10, actions)
+        r_a = rate_actions(env, num_games_pr_action, actions)
         # END O
         best_action=indexOf(r_a,max(r_a))
         action=actions[best_action]
@@ -82,6 +82,14 @@ def run_game():
     env.close()
 
     return score
-
+i = 1
+score = [[]]
 while True:
-    print(run_game())
+    scores = [[]]
+    for _ in range(10):
+        sc = run_game()
+        scores.append([i, sc])
+        print(scores)
+    score.append(scores)
+    i += 1
+    print(score)
