@@ -1,8 +1,9 @@
 # Game 2048: Artificial intelligence
 from operator import indexOf
 
+
 # Instructions:
-#   Move up, down, left, or right to merge the tiles. The objective is to 
+#   Move up, down, left, or right to merge the tiles. The objective is to
 #   get a tile with the number 2048 (or higher)
 #
 # Control:
@@ -22,7 +23,7 @@ def run_game(num_games_pr_action: int = 10):
     action_taken = False
 
     while not exit_program:
-        #env.render()
+        env.render()
 
         # Process game events
         for event in pygame.event.get():
@@ -82,14 +83,33 @@ def run_game(num_games_pr_action: int = 10):
     env.close()
 
     return score
-i = 1
-score = []
-while True:
-    scores = []
-    for _ in range(10):
-        sc = run_game(i)
-        scores.append([i, sc])
-        print(scores)
-    score.append(scores)
-    i += 1
-    print(score)
+
+def main():
+    i = 1
+    score = np.empty((0, 2), int)
+    mean = np.empty((0, 2), float)
+
+    while True:
+        scores = np.empty((0, 2), int)
+        avr = 0
+
+        for _ in range(10):
+            sc = run_game(i)
+            scores = np.append(scores, [[i, sc]], axis = 0)
+            avr = np.average(scores[:, 1])
+            print(scores, avr)
+
+        print(scores, avr)
+
+        score = np.append(score, scores, axis = 0)
+        mean = np.append(mean, [[i, avr]], axis = 0)
+
+        i += 1
+        print(score)
+        print("Mean scores over iterations:")
+        print(np.array2string(mean, formatter = {'float_kind': lambda x: "%.2f" % x}))
+
+
+
+if __name__ == "__main__":
+    main()
