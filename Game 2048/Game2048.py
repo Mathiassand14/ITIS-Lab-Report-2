@@ -166,3 +166,7 @@ class Game2048():
             board[i, j] = 2  # Place a new tile
         score = 0  # Initialize score
         return (board, score)
+
+
+
+

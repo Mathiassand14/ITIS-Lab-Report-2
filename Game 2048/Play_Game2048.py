@@ -43,5 +43,6 @@ while not exit_program:
     if action_taken:
         (board, score), reward, done = env.step(action)
         action_taken = False
-    
+
+
 env.close()

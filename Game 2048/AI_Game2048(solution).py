@@ -49,7 +49,7 @@ while not exit_program:
     #    'up', 'down', 'left', or 'right'
     
     # Number of games to simulate per initial move
-    R = 1
+    R = 25
     scores = {}
     # Loop over initial moves
     for init_action in actions:
