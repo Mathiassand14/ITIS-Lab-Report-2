@@ -176,3 +176,4 @@ synctex.gz
 *.fdb_latexmk
 *.out
 *.gz
+.idea/csv-editor.xml

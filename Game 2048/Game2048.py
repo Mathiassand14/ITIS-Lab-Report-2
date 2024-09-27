@@ -132,6 +132,7 @@ class Game2048():
                 board[i, j] = 0  # Fill the rest with zeros
         return board
 
+
     # Method to move and merge tiles to the left
     def move_left(self, board, score):
         board = self.compress_left(board)  # Compress tiles to the left
