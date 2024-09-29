@@ -76,9 +76,13 @@ def run_game(num_games_pr_action: int = 10, pygame_enabled: bool = True, avr_pct
 
 		r_a = rate_actions_avr(env, num_games_pr_action, actions) if avr_pct == 0 \
 			else rate_actions_pct(env, num_games_pr_action, actions, avr_pct)
+
 		# END O
-		best_action=indexOf(r_a,max(r_a))
-		action=actions[best_action]
+		act = []
+		for i in range(len(r_a)):
+			if r_a[i] == max(r_a):
+				act.append(actions[i])
+		action = act[np.random.randint(len(act))]
 		action_taken = True
 		done = False
 		if action_taken:
