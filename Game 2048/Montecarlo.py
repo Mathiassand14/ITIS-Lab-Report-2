@@ -29,15 +29,18 @@ def rate_actions_pct(board: Game2048, num_games_pr_action: int, posible_actions:
 		for i in range(num_games_pr_action):
 			temp_board = Game2048((board.board, board.score), )
 			(temp_board_state, temp_score), reward, done = temp_board.step(action)
-
+			t = 0
 			while not done:
 				random_action = posible_actions[np.random.randint(len(posible_actions))]
 				(temp_board_state, temp_score), reward, done = temp_board.step(random_action)
-
+				t+=1
+				if t > 1000:
+					print("Infinite loop")
+					break
 			action_scores.append(np.sum(temp_board.board))
-
+			#print(t)
 		if action_scores:  # Check if action_scores is not empty
-			pct_action_score = np.percentile(action_scores, pct / 100)
+			pct_action_score = np.percentile(action_scores, pct, method = "nearest")
 		else:
 			pct_action_score = 0  # Default value or handle it differently if needed
 
