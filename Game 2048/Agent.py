@@ -13,37 +13,45 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from io import StringIO
 from AI_Game2048 import run_game
+import scipy.stats as stats
 
 
 def main():
 	num = 0
+	file = r"Game 2048\scorePercentilesWithRealScore.csv"
 	while True:
 
-		pygame_enabled = True
+		pygame_enabled = 0
 		#avr_pct = randint(0, 10) * 10
 		#num_games_pr_action = 2 ** randint(2, 4)
 		#avr_pct = 0
 		#num_games_pr_action = 4
 		#num += num_games_pr_action
-		data = get_data("Chosen element number", r"Game 2048\scorePercentiles.csv", "Score", "Iteration Per Action",
+		data = get_data("Chosen element number", file, "Score", "Iteration Per Action",
 		                "Percentile")[0]
-		element = []
-		for t in range(len(data[1])):
-			ii = 0
-			for i in range(len(data)):
-
-				element = data[i][t]
-				ii = i
-				if element["Count"] < 100:
-					element = [2**t,i*10]
-					break
-			if type(element) == list:
-				break
+		if data.__len__() == 0:
+			num_games_pr_action = 1
+			avr_pct = 0
 		else:
-			element = [2**(t+1),0]
-		# Reassign these values
-		num_games_pr_action = element[0]
-		avr_pct = element[1]
+			element = []
+			for t in range(len(data[0])):
+				for i in range(len(data)):
+
+					element = data[i][t]
+					if element["Count"] < 100:
+						element = [2**t,i*10]
+						break
+					elif len(data) <= 10:
+						element = [2**(t),(i+1) * 10]
+
+
+				if type(element) == list:
+					break
+			else:
+				element = [2**(t+1),0]
+			# Reassign these values
+			num_games_pr_action = element[0]
+			avr_pct = element[1]
 
 
 		print(num_games_pr_action, avr_pct)
@@ -58,8 +66,11 @@ def main():
 		                                                method = "nearest") if avr_pct != 0 else 0), num)
 
 		amount = 0
-		save_array_to_csv(score, r"Game 2048\scorePercentiles.csv", ["Iteration Per Action", "Score", "Chosen element number", "Percentile"])
-		print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element number")
+		save_array_to_csv(score, file, ["Iteration Per Action", "Score", "Chosen element number", "Percentile"])
+		print("old matrix")
+		print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
+		                                                                                         "number")
+		print_matrix(file, "Iteration Per Action", "Percentile", "Score", "Chosen element number")
 
 
 def save_array_to_csv(array: np.ndarray, filename: str, column_names=None):
@@ -160,7 +171,7 @@ def print_matrix(csv_file, x_col, y_col, data_col, chosen_element):
 			all_labels.update(da.keys())
 
 	# Konverter sættet til en liste (valgfrit, hvis du vil have en liste som output)
-	order = ["Count", "Mean", "Std", "Std_pct", "Max", "Min"]
+	order = ["Count", "Mean", "Std", "Std_pct", "ConIntB", "ConIntT", "Max", "Min"]
 	all_labels_list = list(all_labels)
 	all_labels_list.sort(key = lambda x: order.index(x))
 
@@ -185,33 +196,43 @@ def print_matrix(csv_file, x_col, y_col, data_col, chosen_element):
 
 
 def get_data(chosen_element, csv_file, data_col, x_col, y_col):
-	df = pd.read_csv(csv_file)
-	# Opret en kombineret XY-kolonne
-	df['XY'] = list(zip(df[x_col], df[y_col]))
-	df['XC'] = list(zip(df[x_col], df[chosen_element]))
-	x = df.sort_values(by = x_col)[x_col].unique()
-	y = df.sort_values(by = y_col)[y_col].unique()
-	data = []
-	for i in y:
-		dat = []
-		for j in x:
-			# Brug den kombinerede XY-kolonne til at hente data
-			xy_matches = df[df['XY'] == (j, i)]
-			if not xy_matches.empty:
-				xc_value = xy_matches[chosen_element].values[0]
-				d = df[(df['XY'] == (j, i)) | (df['XC'] == (j, xc_value))][data_col]
-			else:
-				d = pd.Series([], dtype = 'float64')  # Tom serie, hvis der ikke er nogen match
-			dat.append({
-				"Mean"   : f"{d.mean():.2f}" if not pd.isna(d.mean()) else "NaN",
-				"Std"    : f"{d.std():.2f}" if not pd.isna(d.std()) else "NaN",
-				"Min"    : f"{d.min():.2f}" if not pd.isna(d.min()) else "NaN",
-				"Max"    : f"{d.max():.2f}" if not pd.isna(d.max()) else "NaN",
-				"Count"  : d.count(),
-				"Std_pct": f"{d.std() / d.mean() * 100:.2f}%" if not pd.isna(d.std()) and d.mean() != 0 else "NaN"
-			})
-		data.append(dat)
-	return data, x, y
+	try:
+		df = pd.read_csv(csv_file)
+
+		# Opret en kombineret XY-kolonne
+		df['XY'] = list(zip(df[x_col], df[y_col]))
+		df['XC'] = list(zip(df[x_col], df[chosen_element]))
+		x = df.sort_values(by = x_col)[x_col].unique()
+		y = df.sort_values(by = y_col)[y_col].unique()
+		data = []
+		for i in y:
+			dat = []
+			for j in x:
+				# Brug den kombinerede XY-kolonne til at hente data
+				xy_matches = df[df['XY'] == (j, i)]
+				if not xy_matches.empty:
+					xc_value = xy_matches[chosen_element].values[0]
+					d = df[(df['XY'] == (j, i)) | (df['XC'] == (j, xc_value))][data_col]
+				else:
+					d = pd.Series([], dtype = 'float64')  # Tom serie, hvis der ikke er nogen match
+
+				dat.append({
+					"Mean"   : f"{d.mean():.2f}" if not pd.isna(d.mean()) else "NaN",
+					"Std"    : f"{d.std():.2f}" if not pd.isna(d.std()) else "NaN",
+					"Min"    : f"{d.min():.2f}" if not pd.isna(d.min()) else "NaN",
+					"Max"    : f"{d.max():.2f}" if not pd.isna(d.max()) else "NaN",
+					"Count"  : d.count(),
+					"Std_pct": f"{d.std() / d.mean() * 100:.2f}%" if not pd.isna(d.std()) and d.mean() != 0 else "NaN",
+					"ConIntB" : f""
+					            f"{stats.t.interval(0.95, len(d) - 1, loc = d.mean(), scale = stats.sem(d))[0]:.2f}"
+					if not pd.isna(d.mean()) else "NaN",
+					"ConIntT" : f"{stats.t.interval(0.95, len(d) - 1, loc = d.mean(), scale = stats.sem(d))[1]:.2f}"
+					if not pd.isna(d.mean()) else "NaN"
+				})
+			data.append(dat)
+		return data, x, y
+	except:
+		return None, None, None
 
 
 if __name__ == "__main__":
