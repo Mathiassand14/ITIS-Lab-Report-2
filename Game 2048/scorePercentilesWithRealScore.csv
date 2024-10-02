@@ -3678,6 +3678,7 @@ Iteration Per Action,Score,Chosen element number,Percentile
 32,13528,17,50
 32,13840,17,50
 32,15164,17,50
+<<<<<<< Updated upstream
 32,11608,17,50
 32,14732,17,50
 32,5704,17,50
@@ -4405,3 +4406,5 @@ Iteration Per Action,Score,Chosen element number,Percentile
 64,14452,7,10
 64,6648,7,10
 64,5120,7,10
+=======
+>>>>>>> Stashed changes

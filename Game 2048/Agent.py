@@ -10,6 +10,7 @@ import scipy.stats as stats
 import seaborn as sns
 
 from AI_Game2048 import run_game
+import scipy.stats as stats
 
 def test():
 	print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score",
@@ -20,7 +21,11 @@ def test():
 
 def main():
 	num = 0
+<<<<<<< Updated upstream
 	file = r"Game 2048\scorePercentiles.csv"
+=======
+	file = r"Game 2048\scorePercentilesWithRealScore.csv"
+>>>>>>> Stashed changes
 	while True:
 
 		pygame_enabled = 0
@@ -70,7 +75,11 @@ def main():
 		amount = 0
 		save_array_to_csv(score, file, ["Iteration Per Action", "Score", "Chosen element number", "Percentile"])
 		print("old matrix")
+<<<<<<< Updated upstream
 		print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
+=======
+		print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
+>>>>>>> Stashed changes
 		                                                                                         "number")
 		print_matrix(file, "Iteration Per Action", "Percentile", "Score", "Chosen element number")
 
