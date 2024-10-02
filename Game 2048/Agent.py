@@ -21,9 +21,8 @@ def test():
 
 def main():
 	num = 0
-<<<<<<< Updated upstream
 	file = r"Game 2048\scorePercentiles.csv"
-=======
+
 	file = r"Game 2048\scorePercentilesWithRealScore.csv"
 	while True:
 
