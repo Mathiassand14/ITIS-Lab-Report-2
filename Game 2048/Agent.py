@@ -73,11 +73,9 @@ def main():
 		amount = 0
 		save_array_to_csv(score, file, ["Iteration Per Action", "Score", "Chosen element number", "Percentile"])
 		print("old matrix")
-<<<<<<< Updated upstream
-		print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
-=======
+		print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score",
+		             "Chosen element ")
 		print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
->>>>>>> Stashed changes
 		                                                                                         "number")
 		print_matrix(file, "Iteration Per Action", "Percentile", "Score", "Chosen element number")
 
