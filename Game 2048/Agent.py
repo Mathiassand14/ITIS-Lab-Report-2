@@ -25,7 +25,6 @@ def main():
 	file = r"Game 2048\scorePercentiles.csv"
 =======
 	file = r"Game 2048\scorePercentilesWithRealScore.csv"
->>>>>>> Stashed changes
 	while True:
 
 		pygame_enabled = 0
