@@ -11,6 +11,12 @@ import seaborn as sns
 
 from AI_Game2048 import run_game
 
+def test():
+	print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score",
+	             "Chosen element "
+	             "number")
+	print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element number")
+
 
 def main():
 	num = 0
@@ -232,7 +238,8 @@ def get_data(chosen_element, csv_file, data_col, x_col, y_col):
 
 
 if __name__ == "__main__":
-	main()
+	#main()
+	test()
 
 
 
