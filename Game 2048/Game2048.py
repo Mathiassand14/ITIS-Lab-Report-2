@@ -1,7 +1,6 @@
 # 2048 game implementation in Python using Pygame and NumPy libraries
 import numpy as np
 import pygame
-from sympy import false
 
 
 # Define the Game2048 class

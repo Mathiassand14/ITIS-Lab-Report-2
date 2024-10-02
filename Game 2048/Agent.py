@@ -1,24 +1,20 @@
 
 # Game 2048: Artificial intelligence
-from operator import indexOf
 
-from sympy.core.random import randint
-
-from Game2048 import Game2048
-import numpy as np
-import pygame
-import pandas as pd
 import os
+
 import matplotlib.pyplot as plt
-import seaborn as sns
-from io import StringIO
-from AI_Game2048 import run_game
+import numpy as np
+import pandas as pd
 import scipy.stats as stats
+import seaborn as sns
+
+from AI_Game2048 import run_game
 
 
 def main():
 	num = 0
-	file = r"Game 2048\scorePercentilesWithRealScore.csv"
+	file = r"Game 2048\scorePercentiles.csv"
 	while True:
 
 		pygame_enabled = 0
@@ -68,7 +64,7 @@ def main():
 		amount = 0
 		save_array_to_csv(score, file, ["Iteration Per Action", "Score", "Chosen element number", "Percentile"])
 		print("old matrix")
-		print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
+		print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
 		                                                                                         "number")
 		print_matrix(file, "Iteration Per Action", "Percentile", "Score", "Chosen element number")
 
