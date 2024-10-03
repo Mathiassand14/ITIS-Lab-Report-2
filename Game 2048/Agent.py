@@ -5,9 +5,10 @@ import os
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import numpy as np
 from AI_Game2048 import run_game
 import scipy.stats as stats
+import pandas as pd
 
 def test():
 	print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score",

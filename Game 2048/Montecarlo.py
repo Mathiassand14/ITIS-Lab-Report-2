@@ -18,8 +18,6 @@ def rate_actions_avr(board: Game2048, num_games_pr_action: int, posible_actions:
 
 			action_scores.append(sum(temp_board.board))
 
-			action_scores.append(reward)
-
 
 		mean_action_score = np.mean(action_scores)
 		actions_ratings.append(mean_action_score)
@@ -37,7 +35,6 @@ def rate_actions_pct(board: Game2048, num_games_pr_action: int, posible_actions:
 				random_action = posible_actions[np.random.randint(len(posible_actions))]
 				(temp_board_state, temp_score), reward, done = temp_board.step(random_action)
 			action_scores.append(sum(temp_board.board))
-			action_scores.append(reward)
 			#print(t, "moves")
 		if action_scores:  # Check if action_scores is not empty
 			pct_action_score = np.percentile(action_scores, pct, method = "nearest")

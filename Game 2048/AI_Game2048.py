@@ -20,7 +20,7 @@ from Montecarlo import rate_actions_avr, rate_actions_pct
 
 
 
-def run_game(num_games_pr_action: int = 500, pygame_enabled: bool = True, avr_pct: int = 0):
+def run_game(num_games_pr_action: int = 10, pygame_enabled: bool = True, avr_pct: int = 0):
 	env = Game2048(pygame_enabled = pygame_enabled)
 	env.reset()
 	actions = ['left', 'right', 'up', 'down']
