@@ -4,18 +4,16 @@
 import os
 
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import scipy.stats as stats
 import seaborn as sns
 
 from AI_Game2048 import run_game
 import scipy.stats as stats
 
-# def test():
-# 	print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score",
-# 	             "Chosen element number")
-# 	print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element number")
+def test():
+	print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score",
+	             "Chosen element "
+	             "number")
+	print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element number")
 
 
 def main():
@@ -70,7 +68,9 @@ def main():
 		amount = 0
 		save_array_to_csv(score, file, ["Iteration Per Action", "Score", "Chosen element number", "Percentile"])
 		print("old matrix")
-		print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
+		print_matrix(r"Game 2048\scorePercentilesWithRealScore.csv", "Iteration Per Action", "Percentile", "Score",
+		             "Chosen element ")
+		print_matrix(r"Game 2048\scorePercentiles.csv", "Iteration Per Action", "Percentile", "Score", "Chosen element "
 		                                                                                         "number")
 		print_matrix(file, "Iteration Per Action", "Percentile", "Score", "Chosen element number")
 
@@ -239,7 +239,6 @@ def get_data(chosen_element, csv_file, data_col, x_col, y_col):
 
 if __name__ == "__main__":
 	main()
-	# test()
 
 
 
